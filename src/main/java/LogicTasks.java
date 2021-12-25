@@ -1,10 +1,11 @@
 public class LogicTasks {
     public static void main(String[] args) {
 //        for (int i = 0; i < 12; i++) {
-            GeneratedData generatedBoxesInfo = getTwelveBoxesWithOneNonNormalBox();
-            int position = getNonNormalBox(generatedBoxesInfo.getRandomBoxes());
+        GeneratedData generatedBoxesInfo = getTwelveBoxesWithOneNonNormalBox();
+        int position = getNonNormalBox(generatedBoxesInfo.getRandomBoxes());
 //            if (!(position == generatedBoxesInfo.getCorrectBoxPosition())) {
-                System.out.println(position == generatedBoxesInfo.getCorrectBoxPosition());
+        System.out.println(position == generatedBoxesInfo.getCorrectBoxPosition());
+//        System.out.println("counter = " + Box.getCounter());
 //            }
 //        }
     }
@@ -15,9 +16,10 @@ public class LogicTasks {
         Box[] randomBoxes = new Box[12];
 
         int pos = (int) (Math.random() * 12);
-//        System.out.println(pos);
+//        int pos = 11;
+//        System.out.println("pos = " + pos);
         for (int i = 0; i < 12; i++) {
-            randomBoxes[i] = new Box(5);
+            randomBoxes[i] = new Box(-5);
         }
         randomBoxes[pos] = new Box(0);
         return new GeneratedData(randomBoxes, pos);
@@ -27,30 +29,32 @@ public class LogicTasks {
        getNonNormalBox должен вернуть позицию коробки в массиве, отличающейся по value от остальных одинаковых коробок.
      */
     private static int getNonNormalBox(Box[] boxes) {
+        int i;
         int j;
-        int position;
-        Box tmpBox1, tmpBox2;
 
-        j = boxes.length - 1;
-        position = 0;
-        tmpBox1 = boxes[0];
-        tmpBox2 = boxes[j];
-        for (int i = 0; i < boxes.length; ) {
+        i = boxes.length / 2 - 1;
+        j = boxes.length / 2;
+
+        while (i >= 0 && j <= boxes.length - 1) {
             if (Box.comparing(boxes[i], boxes[j]) != 0) {
-                if (Box.comparing(tmpBox1, boxes[i]) != 0) {
-                    position = i;
-                    break;
-                } else if (Box.comparing(tmpBox2, boxes[j]) != 0) {
-                    position = j;
-                    break;
+                if (i != 0) {
+                    if (Box.comparing(boxes[i], boxes[i - 1]) != 0) {
+                        return i;
+                    } else {
+                        return j;
+                    }
+                } else {
+                    if (Box.comparing(boxes[0], boxes[i + 1]) != 0) {
+                        return 0;
+                    } else {
+                        return 11;
+                    }
                 }
             }
-            tmpBox1 = boxes[i];
-            tmpBox2 = boxes[j];
-            j--;
-            i++;
+            i--;
+            j++;
         }
-        return position;
+        return 0;
     }
 }
 
