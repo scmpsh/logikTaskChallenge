@@ -1,6 +1,6 @@
 public class LogicTasks {
     public static void main(String[] args) {
-//        for (int i = 0; i < 12; i++) {
+//        for (int i = 0; i < 1000; i++) {
         GeneratedData generatedBoxesInfo = getTwelveBoxesWithOneNonNormalBox();
         int position = getNonNormalBox(generatedBoxesInfo.getRandomBoxes());
 //            if (!(position == generatedBoxesInfo.getCorrectBoxPosition())) {
@@ -32,10 +32,10 @@ public class LogicTasks {
         int i;
         int j;
 
-        i = boxes.length / 2 - 1;
-        j = boxes.length / 2;
+        i = 5;
+        j = 6;
 
-        while (i >= 0 && j <= boxes.length - 1) {
+        while (i >= 0 && j <= 11) {
             if (Box.comparing(boxes[i], boxes[j]) != 0) {
                 if (i != 0) {
                     if (Box.comparing(boxes[i], boxes[i - 1]) != 0) {
